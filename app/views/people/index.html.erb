@@ -1,0 +1,46 @@
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    padding: 8px; /* Adjust padding as needed */
+    text-align: left;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2; /* Optional: Alternate row background color */
+  }
+</style>
+
+<h1>People</h1>
+<table class = "table table-bordered table-hover">
+  <thead class = "thead-dark">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Instagram</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @people.each do |person| %>
+      <tr>
+        <td><%= person.first_name %></td>
+        <td><%= person.last_name %></td>
+        <td><%= person.email %></td>
+        <td><%= person.phone %></td>
+        <td><%= person.instagram %></td>
+        <td><%= link_to 'Delete', person, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %></td>
+        <td><%= link_to 'Show', person, class: "btn btn-outline-danger btn-sm" %></td>
+        <td><%= link_to 'Edit', edit_person_path(person), class: "btn btn-outline-danger btn-sm" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to 'New Person', new_person_path, class:"btn btn-secondary" %>
+

@@ -1,0 +1,11 @@
+<h1>Editing person</h1>
+
+<%= render "form", person: @person %>
+
+<br>
+<%= link_to 'Show', @person, class:"btn btn-secondary" %>
+
+<%= link_to 'Delete', @person, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+
+<%= link_to 'Back', people_path, class:"btn btn-dark" %>
+
