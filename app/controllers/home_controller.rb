@@ -4,5 +4,9 @@ class HomeController < ApplicationController
   end
   def about
   end
+  def profile
+    @user = current_user
+    @posts = @user.posts
+  end
 end
 

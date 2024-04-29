@@ -1,10 +1,57 @@
-<p style="color: green"><%= notice %></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>People</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa; /* Light gray background */
+    }
 
-<%= render @person %>
+    h2 {
+      color: #000; /* Black heading color */
+      font-family: 'Arial Black', sans-serif; /* Change font */
+    }
 
-<div>
-  <%= link_to "Edit this person", edit_person_path(@person), class:"btn btn-secondary" %> |
-  <%= link_to "Back to people", people_path, class:"btn btn-secondary" %>
-  <br>
-  <%= button_to "Destroy this person", @person, method: :delete, class:"btn btn-danger" %>
-</div>
+    .btn {
+      padding: 8px 16px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #fff;
+      background-color: #007bff; /* Blue button color */
+      border: none;
+      margin-right: 10px;
+    }
+
+    .btn-danger {
+      background-color: #dc3545; /* Light red button color */
+    }
+
+    .btn-secondary {
+      background-color: #6c757d; /* Gray button color */
+    }
+
+    .btn-success {
+      background-color: #28a745; /* Green button color */
+    }
+
+    .btn-group {
+      margin-top: 20px; /* Add some spacing */
+    }
+  </style>
+</head>
+<body>
+  <h2>Personal Details</h2>
+  <p style="color: green"><%= notice %></p>
+
+  <%= render @person %>
+
+  <div class="btn-group">
+    <%= link_to "Edit this person", edit_person_path(@person), class:"btn btn-secondary" %>
+    <%= link_to "Back to people", people_path, class:"btn btn-secondary" %>
+    <%= button_to "Destroy this person", @person, method: :delete, class:"btn btn-danger" %>
+  </div>
+</body>
+</html>

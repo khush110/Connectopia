@@ -1,0 +1,114 @@
+<style>
+.container {
+  max-width: 800px; /* Increase container width */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: flex-start; /* Align items to the left */
+}
+
+.profile-avatar {
+  margin-right: 20px;
+}
+
+.avatar {
+  width: 120px; /* Increase avatar size */
+  height: 120px; /* Increase avatar size */
+  border-radius: 50%;
+}
+
+.profile-info {
+  max-width: 500px; /* Increase max-width */
+}
+
+.profile-username {
+  font-size: 1.6rem; /* Increase font size */
+}
+
+.profile-name {
+  font-size: 1.2rem; /* Increase font size */
+  font-weight: bold;
+  margin-bottom: 10px; /* Increase margin bottom */
+}
+
+.profile-caption {
+  color: #666;
+  margin-bottom: 20px; /* Increase margin bottom */
+}
+
+.edit-profile-button {
+  background-color: #3498db; /* Blue color */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem; /* Increase font size */
+}
+
+.edit-profile-button:hover {
+  background-color: #2980b9; /* Darker blue color on hover */
+}
+
+/* Adjustments for the post section */
+.post-list {
+  display: grid; /* Arrange posts in a grid */
+  grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
+  gap: 20px; /* Add gap between posts */
+  margin-top: 30px; /* Increase margin top */
+}
+
+.post {
+  width: 100%; /* Make posts fill the grid cell */
+  border-radius: 10px; /* Add border radius */
+  overflow: hidden; /* Hide overflow */
+}
+
+.post-image {
+  width: 100%; /* Make images fill the post container */
+  height: 200px; /* Fixed height for all images */
+  object-fit: cover; /* Maintain aspect ratio */
+  border-radius: 10px; /* Add border radius */
+}
+
+.post p {
+  margin-top: 10px; /* Add space between image and title */
+  font-weight: bold; /* Make post title bold */
+  font-size: 1.2rem; /* Increase font size */
+  text-align: center; /* Center-align post title */
+}
+</style>
+
+<div class="container">
+  <div class="profile-header">
+    <div class="profile-avatar">
+      <%= image_tag(@user.avatar, class: "avatar") if @user.avatar.attached? %>
+    </div>
+    <div class="profile-info">
+      <h1 class="profile-username"><%= @user.username %></h1>
+      <p class="profile-name"><%= @user.name %></p>
+      <p class="profile-caption"><%= @user.caption %></p>
+      <%= form_tag(edit_user_registration_path, method: :get) do %>
+        <%= button_tag "Edit Profile", class: "edit-profile-button" %>
+      <% end %>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="profile-posts">
+    <h2 class="section-title">Posts</h2>
+    <div class="post-list">
+      <% @posts.each do |post| %>
+        <a href="<%= post_path(post) %>"> 
+          <div class="post">
+            <%= image_tag(post.image, class: "post-image") if post.image.attached? %>
+          </div>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</div>

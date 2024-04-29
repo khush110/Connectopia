@@ -1,0 +1,115 @@
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+  }
+
+  #posts {
+    display: flex;
+    flex-direction: column; /* Display posts vertically */
+    align-items: center; /* Center posts horizontally */
+    gap: 20px;
+    padding: 20px;
+    max-width: 800px; /* Set maximum width for post container */
+    margin: 0 auto; /* Center post container horizontally */
+  }
+
+  .heart {
+    color: black; /* Make the heart black */
+    font-size: 25px; /* Adjust the size as needed */
+    margin-right: 0px; /* Add some space between the heart and the post */
+    margin-top: -12px;
+  }
+
+  .post {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 30px; /* Increased padding */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Adjusted width to fill container */
+    max-width: 600px; /* Set maximum width for post */
+    margin-bottom: 20px;
+  }
+
+  .post h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px; /* Increased margin bottom */
+  }
+
+  .post p {
+    margin-bottom: 15px; /* Increased margin bottom */
+    line-height: 1.6;
+  }
+
+  .post img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px; /* Increased margin bottom */
+    border: 1px solid #ccc; /* Added border style */
+  }
+
+  .post-actions {
+    margin-top: 15px; /* Increased margin top */
+  }
+
+  .post-actions a {
+    color: #3897f0;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+
+  .post-actions a:hover {
+    text-decoration: underline;
+  }
+
+  .post-actions a:last-child {
+    margin-right: 0;
+  }
+
+  .avatar-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+    margin-top: -8px; /* Move the user photo up */
+  }
+
+  .avatar-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
+
+<p style="color: green"><%= notice %></p>
+
+<h1 style="text-align: center; color: black; font-family: Courier New, Courier, monospace; font-weight: bold;">
+  Posts 
+  <span class="heart">&#x1F5A4;</span>
+</h1>
+
+<div id="posts">
+  <% @posts.each do |post| %>
+    <div class="post">
+      <div class="d-flex align-items-center">
+        <div class="avatar-circle">
+          <%= image_tag(post.user.avatar, alt: "User Avatar") if post.user.avatar.attached? %>
+        </div>
+        <h2><%= post.user.username %></h2>
+      </div>
+      <p style="font-weight: bold; font-size: 18px"><%= post.title %></p>
+      <% if post.image.attached? %>
+        <%= image_tag(post.image, style: "width: 100%; border-radius: 5px;") %>
+      <% else %>
+        <p>No image attached</p>
+      <% end %>
+      <p><%= post.body %></p>
+      <div class="post-actions">
+        <%= link_to "Show this post", post %>
+      </div>
+    </div>
+  <% end %>
+</div>

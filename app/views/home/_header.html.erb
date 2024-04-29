@@ -1,5 +1,14 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <%= link_to 'Management System', root_path, class:"navbar-brand" %>
+<nav class="navbar navbar-expand-lg navbar-dark" style=" background: linear-gradient(to right, #8b008b, orange);">
+
+<a href="<%= root_path %>" class="navbar-brand" style="font-family: 'Pacifico', cursive; font-weight: bold; color: white; font-size: 30px;">
+  <span>C</span><span>o</span><span>n</span><span>n</span><span>e</span><span>c</span><span>t</span><span>o</span><span>p</span><span>i</span><span>a</span>
+  <span style="color: white;">&#x2661;</span>
+</a>
+
+
+
+
+
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -8,23 +17,31 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <%= link_to 'About Us', home_about_path, class:"navbar-link" %>
+        <%= link_to 'About Us', home_about_path, class:"nav-link" %>
       </li>
-     
-      <li class="nav-item">
-        <%= link_to 'People', people_path, class:"navbar-link" %>
-      </li>
-
-      
 
       <% if user_signed_in? %>
-        <li class="nav-item">
-        <%= link_to 'Add People', new_person_path, class:"navbar-link" %>
-      </li>
-        <li class="nav-item">
-          <%= link_to "Edit Profile", edit_user_registration_path, class:"nav-link" %>
-        </li>
 
+      <li class="nav-item">
+        <%= link_to 'People', people_path, class:"nav-link" %>
+      </li>
+      <li class="nav-item">
+          <%= link_to 'Add People', new_person_path, class:"nav-link" %>
+        </li>
+         <li class="nav-item">
+          <%= link_to 'Posts', posts_path, class:"nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "New post", new_post_path, class:"nav-link" %>
+        </li>
+         <li class="nav-item">
+        <%= link_to 'My Profile', home_profile_path, class:"nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "nav-link btn" %>
+        </li>
+       
+    
       <% else %>
         <li class="nav-item">
           <%= link_to "Sign Up", new_user_registration_path, class:"nav-link" %>
@@ -34,12 +51,31 @@
           <%= link_to "Sign In", new_user_session_path, class:"nav-link" %>
         </li>
       <% end %>
-
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+
+    <div class="my-2 my-lg-0">
+      <% if user_signed_in? %>
+        <div class="d-flex align-items-center">
+          <div class="welcome mr-3">Welcome <%= current_user.name %></div>
+           <div class="avatar-circle mr-3" style="width: 40px; height: 40px;">
+            <%= image_tag(current_user.avatar, style: "width: 40px; height: 40px; border-radius: 50%;") if current_user.avatar.attached? %>
+          </div>
+          <div class="search-icon" onclick="toggleSearch()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- Search form -->
+      <form class="form-inline hidden" method="GET" id="searchForm">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search by first name" aria-label="Search" name="search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <!-- End of search form -->
+    </div>
   </div>
 </nav>
 
@@ -47,4 +83,101 @@
   .navbar-nav .nav-item + .nav-item {
     margin-left: 20px; /* Adjust spacing as needed */
   }
+
+  .welcome {
+    color: #fff; /* White text color */
+    font-weight: bold;
+  }
+
+  .search-icon {
+    cursor: pointer;
+  }
+
+  .search-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: white
+    margin-left: 10px; /* Adjust spacing as needed */
+    transition: transform 0.2s ease-in-out; /* Add smooth transition */
+  }
+
+  .search-icon:hover svg {
+    transform: scale(1.1); /* Add hover effect */
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .navbar {
+    background-color: #000; /* Black background color */
+  }
+
+  .navbar-nav .nav-link {
+    color: #fff !important; /* White text color */
+    font-weight: bold;
+  }
+  
+  /* Hide all spans initially */
+.navbar-brand span {
+  opacity: 0;
+  display: inline-block; /* Ensure each letter occupies space */
+}
+
+/* Define keyframes for the animation */
+@keyframes reveal {
+  0% {
+    opacity: 0; /* Start with opacity 0 */
+  }
+  100% {
+    opacity: 1; /* End with opacity 1 */
+  }
+}
+
+/* Apply animation to each span with a delay */
+.navbar-brand span:nth-child(1) {
+  animation: reveal 0.5s ease 0.1s forwards; /* Apply animation with a delay */
+}
+.navbar-brand span:nth-child(2) {
+  animation: reveal 0.5s ease 0.2s forwards; /* Apply animation with a delay */
+}
+.navbar-brand span:nth-child(3) {
+  animation: reveal 0.5s ease 0.3s forwards; /* Apply animation with a delay */
+}
+.navbar-brand span:nth-child(4) {
+  animation: reveal 0.5s ease 0.4s forwards; /* Apply animation with a delay */
+}
+.navbar-brand span:nth-child(5) {
+  animation: reveal 0.5s ease 0.5s forwards; /* Apply animation with a delay */
+}
+.navbar-brand span:nth-child(6) {
+  animation: reveal 0.5s ease 0.6s forwards; /* Apply animation with a delay */
+}
+.navbar-brand span:nth-child(7) {
+  animation: reveal 0.5s ease 0.7s forwards; /* Apply animation with a delay */
+}
+.navbar-brand span:nth-child(8) {
+  animation: reveal 0.5s ease 0.8s forwards; /* Apply animation with a delay */
+}
+.navbar-brand span:nth-child(9) {
+  animation: reveal 0.5s ease 0.9s forwards; /* Apply animation with a delay */
+}
+.navbar-brand span:nth-child(10) {
+  animation: reveal 0.5s ease 1s forwards; /* Apply animation with a delay */
+}
+.navbar-brand span:nth-child(11) {
+  animation: reveal 0.5s ease 1.1s forwards; /* Apply animation with a delay */
+}
+.navbar-brand span:nth-child(12) {
+  animation: reveal 0.5s ease 1.1s forwards; /* Apply animation with a delay */
+}
+
+
 </style>
+
+<script>
+  function toggleSearch() {
+    var searchForm = document.getElementById("searchForm");
+    searchForm.classList.toggle("hidden");
+  }
+</script>

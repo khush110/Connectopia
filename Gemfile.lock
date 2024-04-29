@@ -84,6 +84,7 @@ GEM
     bootsnap (1.18.3)
       msgpack (~> 1.2)
     builder (3.2.4)
+    cancancan (3.5.0)
     capybara (3.40.0)
       addressable
       matrix
@@ -108,6 +109,9 @@ GEM
       warden (~> 1.2.3)
     drb (2.2.1)
     erubi (1.12.0)
+    ffi (1.16.3)
+    font-awesome-sass (6.5.2)
+      sassc (~> 2.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.4)
@@ -214,6 +218,8 @@ GEM
       railties (>= 5.2)
     rexml (3.2.6)
     rubyzip (2.3.2)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     selenium-webdriver (4.19.0)
       base64 (~> 0.2)
       rexml (~> 3.2, >= 3.2.5)
@@ -268,10 +274,13 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activestorage
   bootsnap
+  cancancan
   capybara
   debug
   devise
+  font-awesome-sass
   importmap-rails
   jbuilder
   puma (>= 5.0)

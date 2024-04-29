@@ -1,27 +1,23 @@
-<div id="<%= dom_id person %>">
-  <p>
-    <strong>First name:</strong>
-    <%= person.first_name %>
-  </p>
+<div style="display: flex; margin-top: 20px;">
+  <!-- Image -->
+  <div style="margin-right: 20px;">
+    <div id="<%= dom_id person %>">
+      <% if person.profile_picture.present? %>
+        <%= image_tag(person.profile_picture, style: "width: auto; max-height: 200px") %>
+      <% else %>
+        <p>No profile picture available</p>
+      <% end %>
+    </div>
+  </div>
 
-  <p>
-    <strong>Last name:</strong>
-    <%= person.last_name %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= person.email %>
-  </p>
-
-  <p>
-    <strong>Phone:</strong>
-    <%= person.phone %>
-  </p>
-
-  <p>
-    <strong>Instagram:</strong>
-    <%= person.instagram %>
-  </p>
-
+  <!-- Person Details -->
+  <div>
+    <div id="<%= dom_id person %>">
+      <p><strong>First name:</strong> <%= person.first_name %></p>
+      <p><strong>Last name:</strong> <%= person.last_name %></p>
+      <p><strong>Email:</strong> <%= person.email %></p>
+      <p><strong>Phone:</strong> <%= person.phone %></p>
+      <p><strong>Instagram:</strong> <%= person.instagram %></p>
+    </div>
+  </div>
 </div>

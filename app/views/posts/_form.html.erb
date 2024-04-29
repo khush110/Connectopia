@@ -1,0 +1,33 @@
+<%= form_with(model: post, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+   <div style="margin-bottom: 15px;">
+    <%= form.label :title, "Title", style: "display: block; font-weight: bold;" %>
+    <%= form.text_field :title, class: "form-control", style: "border-radius: 5px; padding: 5px; font-size: 14px; width: 200px;" %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <%= form.label :image, "Attach Image/Video", style: "display: block; font-weight: bold;" %>
+    <%= form.file_field :image, class: "form-control", style: "border-radius: 5px; padding: 5px; font-size: 14px; width: 200px;" %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <%= form.label :body, "Caption is always better!", style: "display: block; font-weight: bold;" %>
+    <%= form.text_field :body, class: "form-control", style: "border-radius: 5px; padding: 5px; font-size: 14px; width: 200px;" %>
+  </div>
+
+
+  <div>
+    <%= form.submit "Save", class: "btn btn-primary", style: "padding: 8px 20px; border-radius: 5px; background-color: #007bff; border: none;" %>
+  </div>
+<% end %>
